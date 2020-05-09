@@ -14,12 +14,20 @@ doc = pikepdf.open(sys.argv[1])
 with doc.open_metadata() as meta:
     meta.load_from_docinfo(doc.docinfo)
 
+print("Done")
 
 
 """
 Results
 File: https://github.com/jeromerobert/pdfarranger/files/4553811/Algo_Extrem.pdf
 (from https://github.com/jeromerobert/pdfarranger/issues/195#issuecomment-621396280)
+
+Fix:
+1.11.2.dev17+g8f7dd4d.d20200503
+/home/da/.local/lib/python3.7/site-packages/pikepdf/models/metadata.py:321: UserWarning: The metadata field /AAPL:Keywords with value 'pikepdf.Array([  ])' has no XMP equivalent, so it was discarded
+  warn(msg)
+Done
+
 
 No error:
 1.7.0
