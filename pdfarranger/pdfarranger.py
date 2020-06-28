@@ -22,6 +22,7 @@ import tempfile
 import signal
 import mimetypes
 import pathlib
+import pikepdf
 import platform
 import configparser
 import warnings
@@ -1623,9 +1624,24 @@ class PdfArranger(Gtk.Application):
         about_dialog.set_name(APPNAME)
         about_dialog.set_program_name(APPNAME)
         about_dialog.set_version(VERSION)
+
+        flatpak = 'Unknown'
+        try:
+            if os.path.exists('/.flatpak-info'):
+                flatpak = 'yes'
+            else:
+                flatpak = 'no'
+        except Exception as e:
+            print(e)
+
         about_dialog.set_comments(_(
-            '%s is a tool for rearranging and modifying PDF files. '
-            'Developed using GTK+ and Python') % APPNAME)
+            f'{APPNAME} is a tool for rearranging and modifying PDF files. '
+            f'Developed using GTK+ and Python\n\n'
+            f'Debugging information for {APPNAME} {VERSION}:\n'
+            f'Pikepdf: {pikepdf.__version__}\n'
+            f'Install location: {__file__}\n'
+            f'Flatpak: {flatpak}\n'
+            f'Platform: {platform.platform()}'))
         about_dialog.set_authors(['Konstantinos Poulios'])
         about_dialog.add_credit_section('Maintainers and contributors', [
             'https://github.com/jeromerobert/pdfarranger/graphs/contributors'])
