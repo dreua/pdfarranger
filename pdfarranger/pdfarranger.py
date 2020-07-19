@@ -438,6 +438,7 @@ class PdfArranger(Gtk.Application):
         self.zoom_set(self.config.zoom_level())
 
         self.iconview = Gtk.IconView(self.model)
+        self.iconview.set_direction(Gtk.TextDirection.RTL)
         self.iconview.clear()
         self.iconview.set_item_width(-1)
 
